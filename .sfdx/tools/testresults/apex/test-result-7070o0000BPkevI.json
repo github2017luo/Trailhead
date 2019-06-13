@@ -1,0 +1,94 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 3,
+        "passing": 3,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Jan 31, 2019 3:17 PM",
+        "testExecutionTime": "217 ms",
+        "testTotalTime": "217 ms",
+        "commandTime": "13079 ms",
+        "hostname": "https://ap8.salesforce.com",
+        "orgId": "00D0o000001AaDaEAK",
+        "username": "irinabogdanets5@gmail.com",
+        "testRunId": "7070o0000BPkevI",
+        "userId": "0050o00000Uixi2AAB"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v44.0/tooling/sobjects/ApexTestResult/07M0o000006lpUjEAI"
+            },
+            "Id": "07M0o000006lpUjEAI",
+            "QueueItemId": "7090o000000pkxDAAQ",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070o0000BPkevIAQR",
+            "MethodName": "test_getRecord",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v44.0/tooling/sobjects/ApexClass/01p0o00000AlHItAAN"
+                },
+                "Id": "01p0o00000AlHItAAN",
+                "Name": "DetailTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 109,
+            "FullName": "DetailTest.test_getRecord"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v44.0/tooling/sobjects/ApexTestResult/07M0o000006lpUkEAI"
+            },
+            "Id": "07M0o000006lpUkEAI",
+            "QueueItemId": "7090o000000pkxDAAQ",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070o0000BPkevIAQR",
+            "MethodName": "test_goBuy",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v44.0/tooling/sobjects/ApexClass/01p0o00000AlHItAAN"
+                },
+                "Id": "01p0o00000AlHItAAN",
+                "Name": "DetailTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 56,
+            "FullName": "DetailTest.test_goBuy"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v44.0/tooling/sobjects/ApexTestResult/07M0o000006lpUlEAI"
+            },
+            "Id": "07M0o000006lpUlEAI",
+            "QueueItemId": "7090o000000pkxDAAQ",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070o0000BPkevIAQR",
+            "MethodName": "test_goShopping",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v44.0/tooling/sobjects/ApexClass/01p0o00000AlHItAAN"
+                },
+                "Id": "01p0o00000AlHItAAN",
+                "Name": "DetailTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 52,
+            "FullName": "DetailTest.test_goShopping"
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+<apex:page controller="ProductOrderController" docType="html-5.0" lightningStylesheets="true">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+    function calculateCost(){
+        var newCount = document.querySelector('input[id*="count"]').value;
+        if ((newCount <= {!product.Units_Available__c}) && (newCount > 0)) {
+            var totalProduct = (newCount * {!product.Unit_Price__c}).toFixed(2);
+            document.querySelector('span[id*="total"]').innerText = '$' + totalProduct;
+        } else {
+            document.querySelector('input[id*="count"]').value = '0';
+            document.querySelector('span[id*="total"]').innerText = '$0.00';
+            swal({
+                title: "Oops...",
+                text: "Available value " + {!product.Units_Available__c} + " is less than entered!",
+                icon: "error",
+                timer: 4000,
+                button: false
+            });
+        }
+    }
+    </script>
+    <apex:pagemessages />
+    <apex:slds />
+    <apex:form >
+        <apex:pageBlock >
+            <apex:outputPanel styleClass="slds-panel__header slds-text-heading_large"
+                              style="display:flex; justify-content: space-around; ">
+                <apex:outputLabel value="{!$Label.Contact_Information}" style="font-size:20px"/>
+                <apex:outputLabel value="{!$Label.Product_Information}" style="font-size:20px"/>
+            </apex:outputPanel>
+            <apex:panelGrid columns="2">
+                <apex:pageBlockSection columns="1">
+                    <apex:inputField label="{!$ObjectType.Contact.fields.Email.Label}"
+                                     value="{!customer.Email}" required="true"/>
+                    <apex:inputField label="{!$ObjectType.Contact.fields.FirstName.Label}" value="{!customer.FirstName}"/>
+                    <apex:inputField label="{!$ObjectType.Contact.fields.LastName.Label}" value="{!customer.LastName}"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1">
+                    <apex:outputField label="{!$Label.Product_Name}" value="{!product.Name}"/>
+                    <apex:outputField label="{!$Label.Cost_little}" value="{!product.Unit_Price__c}" id="price"/>
+                    <apex:inputField type="number" onchange="calculateCost()" onkeyup="calculateCost()" label="{!$Label.Unit_Count}"
+                                     value="{!order.Units__c}" id="count" required="true" styleClass="slds-input" style="width:187px;"/>
+                    <apex:outputText label="{!$Label.Total_Amount}" id="total" value="$0.00"/>
+                </apex:pageBlockSection>
+            </apex:panelGrid>
+            <div style="height: 20%">
+                <div class="slds-docked-form-footer">
+                    <apex:outputLink value="{!$Page.ProductTableList}" styleClass="slds-button slds-button_neutral">
+                        <apex:outputText value="{!$Label.To_Shopping}" />
+                    </apex:outputLink>
+                    <apex:outputLink value="/apex/ProductDetailPage?id={!product.Id}"
+                                     styleClass="slds-button slds-button_neutral">
+                        <apex:outputText value="{!$Label.To_Detail}" />
+                    </apex:outputLink>
+                    <apex:commandButton value="{!$Label.Buy}" action="{!buyProduct}"
+                                        styleClass="slds-button slds-button_brand" onclick="showPageMessages();"/>
+                </div>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

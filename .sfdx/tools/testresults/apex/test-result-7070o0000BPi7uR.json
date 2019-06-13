@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Jan 29, 2019 4:45 PM",
+        "testExecutionTime": "124 ms",
+        "testTotalTime": "124 ms",
+        "commandTime": "13808 ms",
+        "hostname": "https://ap8.salesforce.com",
+        "orgId": "00D0o000001AaDaEAK",
+        "username": "irinabogdanets5@gmail.com",
+        "testRunId": "7070o0000BPi7uR",
+        "userId": "0050o00000Uixi2AAB"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v44.0/tooling/sobjects/ApexTestResult/07M0o000005x8TnEAI"
+            },
+            "Id": "07M0o000005x8TnEAI",
+            "QueueItemId": "7090o000000pkK7AAI",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070o0000BPi7uRAQR",
+            "MethodName": "findDetailProduct",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v44.0/tooling/sobjects/ApexClass/01p0o00000AlHItAAN"
+                },
+                "Id": "01p0o00000AlHItAAN",
+                "Name": "DetailTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 124,
+            "FullName": "DetailTest.findDetailProduct"
+        }
+    ]
+}

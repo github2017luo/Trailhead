@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Name_Team_Unique</fullName>
+    <active>true</active>
+    <errorConditionFormula>Name  =  VLOOKUP($ObjectType.Team__c.Fields.Name, $ObjectType.Team__c.Fields.Name, Name)</errorConditionFormula>
+    <errorMessage>Team Name has already exist!</errorMessage>
+</ValidationRule>

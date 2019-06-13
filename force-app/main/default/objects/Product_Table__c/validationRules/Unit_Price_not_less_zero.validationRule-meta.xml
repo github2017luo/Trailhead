@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unit_Price_not_less_zero</fullName>
+    <active>true</active>
+    <description>Don&#39;t create a record where Unit Price less zero.</description>
+    <errorConditionFormula>Unit_Price__c  &lt;=  0</errorConditionFormula>
+    <errorMessage>Unit Price can&#39;t be less zero!</errorMessage>
+</ValidationRule>

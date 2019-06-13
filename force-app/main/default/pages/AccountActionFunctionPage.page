@@ -1,0 +1,70 @@
+<apex:page controller="AccountActionFunctionController">
+    <apex:form id="addTypeInTitle">  
+        <apex:pageBlock title="{!$Label.Create_new} {!account.Type} {!$ObjectType.Account.Name}" rendered="{!account.id==null}">            
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.Account.Fields.Name.Label}" for="accountName"/>
+                    <apex:panelGroup styleClass="col02 requiredInput" layout="block">
+                        <apex:panelGroup styleClass="requiredBlock" layout="block"/>
+                        <apex:inputText value="{!account.Name}" id="accountName"/>
+                    </apex:panelGroup>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.Account.Fields.Type.Label}" for="accountType"/>
+                    <apex:inputField value="{!account.Type}" id="accountType">
+                        <apex:actionSupport event="onchange" reRender="addTypeInTitle"/>
+                    </apex:inputField>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.Save}" action="{!save}" reRender="form2, addTypeInTitle"/>
+                <apex:commandButton value="{!$Label.Cancel}" action="{!cancel}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    
+    <apex:form id="form2">
+        <apex:pageBlock title="{!$Label.New} {!account.Type} {!$Label.Create_new} {!createdDate} {!$Label.and} {!userTime}" rendered="{!showAccountView}">
+            <apex:pageBlockSection > 
+                <apex:outputField value="{!account.Name}" />
+                <apex:outputField value="{!account.Type}" /> 
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="{!$Label.New_Account}" action="{!refresh}" />
+                <apex:commandButton value="{!$Label.Show_Hide_Input_File}" action="{!showHideComponent}"/>
+            </apex:pageBlockButtons>   
+        </apex:pageBlock>
+    </apex:form>
+    
+    <apex:form >
+        <apex:pageBlock title="{!account.Name} {!$Label.with} {!nameAttach}" rendered="{!inputComponent}">
+            <apex:pageBlockSection > 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="File Name" for="fileName"/>
+                    <apex:inputText value="{!attachment.name}" id="fileName"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="File" for="file"/>
+                    <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!upload}" value="Add file" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>  
+    </apex:form>
+
+    <apex:form > 
+        <apex:pageMessages />
+        <apex:actionFunction name="getCurrentTime" action="{!getCurrentTime}" rerender="out"/>
+    </apex:form>
+    
+    <apex:outputPanel id="out" >
+        {!currentTime}
+    </apex:outputPanel>
+    
+    <script>
+    window.setInterval(getCurrentTime,1000)
+    </script>    
+</apex:page>

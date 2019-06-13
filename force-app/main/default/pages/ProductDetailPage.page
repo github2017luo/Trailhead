@@ -1,0 +1,44 @@
+<apex:page standardController="Product_Table__c" extensions="ProductDetailController" docType="html-5.0" lightningStylesheets="true">
+    <apex:slds />
+    <apex:form >
+        <apex:pageBlock >
+            <apex:outputPanel styleClass="slds-panel__header slds-panel__header_align-center" >
+                <apex:outputText value="{!Product_Table__c.Name}" style="margin-left:30%;" styleClass="slds-text-heading_large"/>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="slds-grid" layout="block" >
+                <apex:outputPanel layout="block" styleClass="slds-col slds-size_1-of-2" >
+                    <apex:image value="{!Product_Table__c.Image_url__c}" style="width:300px; height:390px; margin-top:5%;" styleClass="slds-align_absolute-center" />
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" styleClass="slds-col slds-size_1-of-2"><br />
+                    <div style="color:#3B5998;">{!$Label.AMOUNT}</div>
+                    <apex:outputPanel layout="block">
+                        <apex:outputField value="{!Product_Table__c.Units_Available__c}" />
+                    </apex:outputPanel><br />
+                    <div style="color:#3B5998;">{!$Label.TITLE}</div>
+                    <apex:outputPanel layout="block">
+                        <apex:outputField value="{!Product_Table__c.Title__c}" />
+                    </apex:outputPanel><br />
+                    <div style="color:#3B5998;">{!$Label.DESCRIPTION}</div>
+                    <apex:outputPanel layout="block">
+                        <apex:outputField value="{!Product_Table__c.Product_Description__c}" />
+                    </apex:outputPanel><br />
+                    <div style="color:#3B5998;">{!$Label.COST}</div>
+                    <apex:outputPanel layout="block">
+                        <apex:outputField value="{!Product_Table__c.Unit_Price__c}" />
+                    </apex:outputPanel><br /><br />
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <div style="height: 20%">
+                <div class="slds-docked-form-footer">
+                    <apex:commandButton value="{!$Label.To_Shopping}" action="{!goShopping}"
+                                        styleClass="slds-button slds-button_neutral" reRender="forSendId"/>
+                    <apex:outputPanel id="forSendId"/>
+                    <apex:commandButton value="{!$Label.Buy}" action="{!goBuy}" reRender="forSendId"
+                                        styleClass="slds-button slds-button_brand">
+                        <apex:param value="{!Product_Table__c.Id}" name="productId"/>
+                    </apex:commandButton>
+                </div>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

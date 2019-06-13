@@ -1,0 +1,102 @@
+<apex:page controller="ContactExampleController">
+ 
+    <!-- 
+Вариант с сортировкой по столбцу
+'SELECT Id, Name, Email, Contact_Level__c, AccountId, OwnerId, CreatedById, CreatedDate '
+ 
+Необходимо отобразить следующие поля: 
+1 Name (link), 2 Email, 3 Contact Level (picklist), 4 Account (lookup), 
+5 Owner (lookup), 6 Created By (lookup), 7 Created Date.
+-->
+ 
+    <apex:form >
+        <apex:pageBlock title="Тестовое задание Success Craft 181108.009" id="thisBlock">
+ 
+            <!-- табличка  -->
+            <apex:pageBlockTable value="{! Contact }" var="ct" id="thisTable">
+ 
+                <apex:column value="{! ct.Name }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByName }" reRender="thisBlock">
+                            <apex:outputText value="1. {! $ObjectType.Contact.Fields.Name.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+ 
+                <apex:column value="{! ct.Email }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByEmail }" reRender="thisBlock">
+                            <apex:outputText value="2. {! $ObjectType.Contact.Fields.Email.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+ 
+ 
+                <apex:column value="{! ct.AccountId }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByAccountId }" reRender="thisBlock">
+                            <apex:outputText value="4. Accounts" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+ 
+                <apex:column value="{! ct.OwnerId }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByOwnerId }" reRender="thisBlock">
+                            <apex:outputText value="5. Owners" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+ 
+                <apex:column value="{! ct.CreatedById }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByCreatedById }" reRender="thisBlock">
+                            <apex:outputText value="6. Created By" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+ 
+                <apex:column value="{! ct.CreatedDate }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByCreatedDate }" reRender="thisBlock">
+                            <apex:outputText value="7. {! $ObjectType.Contact.Fields.CreatedDate.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+ 
+            </apex:pageBlockTable>
+ 
+            <!-- кнопочки вперед-назад...  -->
+            <div align="center" id="button">
+                <apex:commandButton action="{! setList.first }" value=" << " title="First Page" disabled="{!!setList.HasPrevious}" reRender="thisBlock,button"
+                />
+                <apex:commandButton action="{! setList.previous }" value=" Previous " disabled="{!!setList.HasPrevious}" reRender="thisBlock,button"
+                />
+                <apex:commandButton action="{! setList.next }" value=" Next > " disabled="{!!setList.HasNext}" reRender="thisBlock,button"
+                />
+                <apex:commandButton action="{! setList.last }" value=" >> " title="Last Page" disabled="{!!setList.HasNext}" reRender="thisBlock,button"
+                />
+ 
+                <!-- поле - колво страниц -->
+                <span style="float:right">
+                    <apex:outputLabel value=" Page " />
+                    <apex:InputText value="{! PageNumber }" maxLength="4" size="1" />
+                    <apex:outputLabel value=" of {! TotalPages }" />
+                </span>
+ 
+            </div>
+ 
+            <div>
+                <!-- выпадающий список - типо пагинация -->
+                <span style="float:right">
+                    <apex:SelectList value="{! PageSize }" size="1">
+                        <apex:selectOptions value="{! PageSizeList }" />
+                        <apex:actionSupport event="onchange" reRender="thisBlock" />
+                    </apex:SelectList>
+                </span>
+            </div>
+ 
+        </apex:pageBlock>
+ 
+    </apex:form>
+</apex:page>

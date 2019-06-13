@@ -1,0 +1,105 @@
+<apex:page Controller="ContactsListController">
+    <apex:form >
+        <apex:pageBlock title="Contacts List" id="thisBlock">
+            
+            Filter: 
+            <apex:selectList value="{!filter}" size="1" >
+                <apex:selectOptions value="{! listViewFilter }"/>
+    			<apex:actionSupport event="onchange" reRender="thisBlock"/>
+        	</apex:selectList> 
+            <!--
+            <apex:selectList value="{!AccFilterId}" size="1" id="filterMenu">
+     		<apex:selectOptions value="{!AccountExistingViews}"></apex:selectOptions>
+     		<apex:actionSupport event="onchange" rerender="thisTable"/>
+   	   </apex:selectList>-->
+            
+            <!--Sortirovka-->
+            <apex:pageBlockTable value="{! Contact }" var="ct" id="thisTable">
+                <apex:column value="{! ct.Name }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByName }" reRender="thisTable">
+                            <apex:outputText value="{! $ObjectType.Contact.Fields.Name.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+                
+                <apex:column value="{! ct.Title }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByTitle }" reRender="thisTable">
+                            <apex:outputText value="{! $ObjectType.Contact.Fields.Title.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+                
+                <apex:column value="{! ct.Account.Name }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByAccountName }" reRender="thisTable">
+                            <apex:outputText value="Account Name" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+                
+                <apex:column value="{! ct.Phone }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByPhone }" reRender="thisTable">
+                            <apex:outputText value="{! $ObjectType.Contact.Fields.Phone.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+                
+                <apex:column value="{! ct.Email }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByEmail }" reRender="thisTable">
+                            <apex:outputText value="{! $ObjectType.Contact.Fields.Email.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+                
+                <apex:column value="{! ct.MobilePhone }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByMobilePhone }" reRender="thisTable">
+                            <apex:outputText value="{! $ObjectType.Contact.Fields.MobilePhone.Label }" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+                
+                <apex:column value="{! ct.Owner.Name }">
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sortByOwnerName }" reRender="thisTable">
+                            <apex:outputText value="Owner Name" />
+                        </apex:commandLink>
+                    </apex:facet>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            <!-- кнопочки вперед-назад...  -->
+            <div align="center" id="button">
+                <apex:commandButton action="{! setList.first }" value=" << " title="First Page" disabled="{!!setList.HasPrevious}" reRender="thisBlock,button"
+                />
+                <apex:commandButton action="{! setList.previous }" value="< Previous " disabled="{!!setList.HasPrevious}" reRender="thisBlock,button"
+                />
+                <apex:commandButton action="{! setList.next }" value=" Next > " disabled="{!!setList.HasNext}" reRender="thisBlock,button"
+                />
+                <apex:commandButton action="{! setList.last }" value=" >> " title="Last Page" disabled="{!!setList.HasNext}" reRender="thisBlock,button"
+                />
+ 
+                <!-- поле - колво страниц -->
+                <span style="float:left">
+                    <apex:outputLabel value=" Page " />
+                    <apex:InputText value="{! PageNumber }" maxLength="4" size="1" />
+                    <apex:outputLabel value=" of {! TotalPages }" />
+                </span>
+ 
+            
+                <!-- выпадающий список - типо пагинация -->
+                <span style="float:right">
+                    <apex:SelectList value="{! PageSize }" size="1">
+                        <apex:selectOptions value="{! PageSizeList }" />
+                        <apex:actionSupport event="onchange" reRender="thisBlock" />
+                    </apex:SelectList>
+                </span>
+            </div>        
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

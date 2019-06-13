@@ -1,0 +1,103 @@
+<apex:page standardController="Contact" recordSetVar="contact" extensions="ContactCustomController">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.Contacts_List}" id="thisBlock">
+            
+            <apex:selectList value="{!contactSetController.filterId}" size="1" >
+                <apex:selectOptions value="{! contactSetController.listViewOptions }"/>
+                <apex:actionSupport event="onchange" reRender="thisBlock"/>
+            </apex:selectList>
+            
+            <apex:panelGroup >
+                <apex:inputText id="searchText" value="{!searchText}"/>
+                <apex:commandButton value="Search!" action="{!doSearch}" 
+                                    rerender="thisBlock"/>
+            </apex:panelGroup>
+            
+            <apex:pageBlockTable value="{! contacts }" var="ct" id="thisTable">
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{!sorting}" value="{! $ObjectType.Contact.Fields.Name.Label }" reRender="thisTable">
+                            <apex:param value="Name" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.Name }"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sorting }" value="{! $ObjectType.Contact.Fields.Title.Label }" reRender="thisTable">
+                            <apex:param value="Title" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.Title }"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sorting }" value="{!$ObjectType.Account.Fields.Name.Label}" reRender="thisTable">
+                            <apex:param value="Account.Name" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.Account.Name }"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sorting }" value="{! $ObjectType.Contact.Fields.Phone.Label }" reRender="thisTable">
+                            <apex:param value="Phone" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.Phone }"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sorting }" value="{! $ObjectType.Contact.Fields.Email.Label }" reRender="thisTable">
+                            <apex:param value="Email" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.Email }"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sorting }" value="{! $ObjectType.Contact.Fields.MobilePhone.Label }" reRender="thisTable">
+                            <apex:param value="MobilePhone" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.MobilePhone }"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{! sorting }" value="{!$ObjectType.Contact.Fields.OwnerId.Label}" reRender="thisTable">
+                            <apex:param value="OwnerId" name="Column" assignTo="{!sortingColumn}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputField value="{! ct.OwnerId }"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            <div align="center" id="button">
+                <apex:commandButton action="{! contactSetController.Previous }" value="{!$Label.Previous}"
+                                    disabled="{!!contactSetController.HasPrevious}" reRender="thisBlock,button" />
+                <apex:commandButton action="{! contactSetController.Next }" value="{!$Label.Next}"
+                                    disabled="{!!contactSetController.HasNext}" reRender="thisBlock,button" />
+                
+                <span style="float:left">
+                    <apex:outputLabel value=" Page " />
+                    <apex:InputText value="{! pageNumber }" maxLength="4" size="1" />
+                    <apex:outputLabel value=" of {! totalPages }" />
+                </span>
+                
+                <span style="float:right">
+                    <apex:SelectList value="{! pageSize }" size="1">
+                        <apex:selectOptions value="{! pageSizeList }" />
+                        <apex:actionSupport event="onchange" reRender="thisBlock" />
+                    </apex:SelectList>
+                </span>
+            </div>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

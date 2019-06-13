@@ -1,0 +1,38 @@
+<apex:page controller="ProductTableController" docType="html-5.0" lightningStylesheets="true">
+    <apex:slds />
+    <apex:form style="background: black">
+        <apex:image url="https://www.maxfactor.com/assets/images/logo.svg" style="margin-left:8%"/>
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!productTables}" var="item" style="font-size:15px;"
+                                 styleClass="slds-wrap" headerClass="slds-line-height_reset slds-text-align_center">
+                <apex:column headerValue="{!$Label.IMAGE}" styleClass="slds-col slds-size_1-of-12">
+                    <apex:image value="{!item.Image_url__c}"/>
+                </apex:column>
+                <apex:column styleClass="slds-col slds-size_2-of-12">
+                        <apex:commandLink value="{!item.Name}" action="{!goDetail}" reRender="forSendId">
+                                <apex:param value="{!item.Id}" assignTo="{!productId}" name="productId"/>
+                        </apex:commandLink>
+                </apex:column>
+                <apex:column headerValue="{!$Label.TITLE}" styleClass="slds-col slds-size_3-of-12">
+                    <apex:outputField value="{!item.Title__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.DESCRIPTION}" styleClass="slds-col slds-size_4-of-12">
+                    <apex:outputText value="{!LEFT(item.Product_Description__c, 100) + '...'} "/>
+                    <apex:commandLink value="{!$Label.More}" action="{!goDetail}" styleClass="slds-m-left_small" reRender="forSendId">
+                        <apex:param value="{!item.Id}" assignTo="{!productId}" name="productId"/>
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column headerValue="{!$Label.COST}" styleClass="slds-col slds-size_1-of-12" style="text-align:center;">
+                    <apex:outputField value="{!item.Unit_Price__c}" />
+                    <apex:outputPanel id="forSendId"/>
+                </apex:column>
+                <apex:column styleClass="slds-col slds-size_1-of-12">
+                    <apex:commandButton value="{!$Label.Buy}" action="{!goBuy}" reRender="forSendId"
+                                        styleClass="slds-button slds-button_brand">
+                        <apex:param value="{!item.Id}" assignTo="{!productId}" name="productId"/>
+                    </apex:commandButton>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

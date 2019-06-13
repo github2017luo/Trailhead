@@ -1,0 +1,50 @@
+<apex:page standardController="Contact" recordSetVar="contacts">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.Contacts_List}" id="contacts_list">
+            <apex:pageBlockTable value="{! contacts }" var="ct">
+                <apex:column headerValue="{!$ObjectType.Contact.Fields.Name.Label}">
+                    <apex:outputField value="{! ct.Name }"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Contact.Fields.Title.Label}">
+                    <apex:outputField value="{! ct.Title }"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Account.Fields.Name.Label}" >
+                    <apex:outputField value="{! ct.Account.Name }"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Contact.Fields.Phone.Label}">
+                    <apex:outputField value="{! ct.Phone }"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Contact.Fields.Email.Label}">
+                    <apex:outputField value="{! ct.Email }"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Contact.Fields.MobilePhone.Label}">
+                    <apex:outputField value="{! ct.MobilePhone }"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Contact.Fields.OwnerId.Label}" >
+                    <apex:outputField value="{! ct.OwnerId }"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            <table style="width: 100%"><tr>
+                <td>
+                    {!$Label.Page} <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                </td>
+                <td align="center">
+                    <apex:commandLink action="{! Previous }" value="{!$Label.Previous}" rendered="{! HasPrevious }"/>
+                    <apex:outputText style="color: #ccc;" value="{!$Label.Previous}" rendered="{! NOT(HasPrevious) }"/>
+                    &nbsp;&nbsp;
+                    <apex:commandLink action="{! Next }" value="{!$Label.Next}" rendered="{! HasNext }"/>
+                    <apex:outputText style="color: #ccc;" value="{!$Label.Next}" rendered="{! NOT(HasNext) }"/>
+                </td>
+                <td align="right">
+                    {!$Label.Records_per_page}
+                    <apex:selectList value="{! PageSize }" size="1">
+                        <apex:selectOption itemValue="5" itemLabel="5"/>
+                        <apex:selectOption itemValue="10" itemLabel="10"/>
+                        <apex:selectOption itemValue="20" itemLabel="20"/>
+                        <apex:actionSupport event="onchange" reRender="contacts_list"/>
+                    </apex:selectList>
+                </td>
+                </tr></table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

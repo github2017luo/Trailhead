@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2019-01-31T10:08:37+03:00" hostname="https://ap8.salesforce.com" tests="9" failures="0"  errors="0"  time="1.66">
+        <properties>
+            <property name="outcome" value="Passed"/>
+            <property name="testsRan" value="9"/>
+            <property name="passing" value="9"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Jan 31, 2019 10:08 AM"/>
+            <property name="testExecutionTime" value="1.66 s"/>
+            <property name="testTotalTime" value="1.66 s"/>
+            <property name="commandTime" value="15.01 s"/>
+            <property name="hostname" value="https://ap8.salesforce.com"/>
+            <property name="orgId" value="00D0o000001AaDaEAK"/>
+            <property name="username" value="irinabogdanets5@gmail.com"/>
+            <property name="testRunId" value="7070o0000BPkNE7"/>
+            <property name="userId" value="0050o00000Uixi2AAB"/>
+        </properties>
+        <testcase name="buy" classname="OrderTest" time="0.68">
+        </testcase>
+        <testcase name="clearFormValues" classname="OrderTest" time="0.05">
+        </testcase>
+        <testcase name="createOrderError" classname="OrderTest" time="0.1">
+        </testcase>
+        <testcase name="createOrderSuccess" classname="OrderTest" time="0.13">
+        </testcase>
+        <testcase name="existContact" classname="OrderTest" time="0.34">
+        </testcase>
+        <testcase name="insertNewContact" classname="OrderTest" time="0.13">
+        </testcase>
+        <testcase name="updateAvailableProductError" classname="OrderTest" time="0.05">
+        </testcase>
+        <testcase name="updateAvailableProductSuccess" classname="OrderTest" time="0.07">
+        </testcase>
+        <testcase name="updateContact" classname="OrderTest" time="0.12">
+        </testcase>
+    </testsuite>
+</testsuites>

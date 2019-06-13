@@ -1,0 +1,77 @@
+<apex:page Controller="ContactLocationController" showHeader="false" sidebar="false" lightningStyleSheets="true"> 
+    <apex:slds />
+    <apex:form >
+        <apex:pageBlock title="Contact Location">
+            <apex:pageBlockTable styleclass="slds-table slds-table_cell-buffer slds-table_bordered" value="{!contactList}" var="item"  style="width:10%; float:left">
+                <apex:column headerClass="slds-text-align_center" headerValue="{!$ObjectType.Contact.fields.Full_Name__c.Label}">
+                    <a href="#" onclick='findPerson({! IF(item.MailingLatitude != null, item.MailingLatitude, "null")}, {!IF(item.MailingLongitude != null, item.MailingLongitude, "null")}, "{!item.Full_Name__c}")'>
+                    	<apex:outputField value="{!item.Full_Name__c}" />
+                    </a>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+    <head>
+        <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0; }
+            #map-canvas { height: 94%; }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYS1lFS0TzuH9WIZnw31ELbjVlOGkjaVM&callback=initMap"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script>
+        var markerList = [];
+
+        function initialize(lat, long, zom) {
+            var mapOptions = {
+                center: new google.maps.LatLng(lat, long),
+                zoom: zom
+            };
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            loadHotels();
+            return map;
+        }
+        
+        function loadHotels() {
+    		Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.ContactLocationController.findAll}',
+        	function(result, event){
+            	if (event.status) {
+                	for (var i=0; i<result.length; i++) {
+                        var name = result[i].Full_Name__c;
+                    	var lt = result[i].MailingLatitude;
+                    	var lng = result[i].MailingLongitude;
+                    	addMarker(lt, lng, name);
+                	}
+            	} else {
+                	alert(event.message);
+            	}
+        	},
+        	{escape: true});
+		}
+        
+        google.maps.event.addDomListener(window, 'load', function() { initialize(48.9525, -54.622402, 3); });
+
+        function addMarker(lt, lng, name) {
+    		var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lt, lng),
+            map: map,
+            title: name
+   			});
+    		markerList.push(marker);
+		}
+
+        function findPerson(lat, long, personName) {
+            if (lat == null || long == null) {
+            	alert("{!$Label.No_address_is_found}");    
+            }
+            
+            var map = initialize(lat, long, 15);
+            var marker = addMarker(lat, long, personName);
+        }
+        
+        </script>
+    </head>
+    <body>
+        <div id="map-canvas"/>
+    </body>
+</apex:page>

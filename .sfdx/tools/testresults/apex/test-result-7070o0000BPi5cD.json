@@ -1,0 +1,46 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 1,
+        "passing": 1,
+        "failing": 0,
+        "skipped": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Jan 29, 2019 4:06 PM",
+        "testExecutionTime": "152 ms",
+        "testTotalTime": "152 ms",
+        "commandTime": "17518 ms",
+        "hostname": "https://ap8.salesforce.com",
+        "orgId": "00D0o000001AaDaEAK",
+        "username": "irinabogdanets5@gmail.com",
+        "testRunId": "7070o0000BPi5cD",
+        "userId": "0050o00000Uixi2AAB"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v44.0/tooling/sobjects/ApexTestResult/07M0o000005x8P2EAI"
+            },
+            "Id": "07M0o000005x8P2EAI",
+            "QueueItemId": "7090o000000pkK2AAI",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7070o0000BPi5cDAQR",
+            "MethodName": "insertError",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v44.0/tooling/sobjects/ApexClass/01p0o000008EFWIAA4"
+                },
+                "Id": "01p0o000008EFWIAA4",
+                "Name": "AccountActionFunctionControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 152,
+            "FullName": "AccountActionFunctionControllerTest.insertError"
+        }
+    ]
+}

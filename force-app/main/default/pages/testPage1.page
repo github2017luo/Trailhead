@@ -1,0 +1,52 @@
+<apex:page controller="testController">
+    <apex:form >
+        <apex:pageMessages />
+        <apex:pageBlock title="Create new {!account.Type} Account" rendered="{!account.id==null}" id="addTypeInTitle">
+            <apex:pageBlockSection >
+                <apex:inputField value="{!account.Name}" />
+                <apex:inputField value="{!account.Type}" >
+                    <apex:actionSupport event="onchange" reRender="addTypeInTitle"/>
+                </apex:inputField>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" onclick="getTime();" reRender="time"/>
+                <apex:commandButton value="Cancel" action="{!cancel}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        
+        <apex:actionFunction name="getTime" action="{!save}" />
+        
+        <apex:pageBlock title="New {!account.Type} Account created {!createdDate} and {!userTime}" rendered="{!account.id!=null}" id="time">
+            <apex:pageBlockSection > 
+                <apex:outputField value="{!account.Name}" />
+                <apex:outputField value="{!account.Type}" /> 
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="New Account" action="{!refresh}" />
+                <apex:commandButton value="Show/Hide Input File" action="{!showHideComponent}" />
+            </apex:pageBlockButtons>
+            
+        </apex:pageBlock>
+    </apex:form>
+    
+    <apex:form rendered="{!inputComponent}" >
+        <apex:pageBlock title="Upload file" >
+            <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="File Name" for="fileName"/>
+                    <apex:inputText value="{!document.name}" id="fileName"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="File" for="file"/>
+                    <apex:inputFile value="{!document.body}" filename="{!document.name}" id="file"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!upload}" value="Add file"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

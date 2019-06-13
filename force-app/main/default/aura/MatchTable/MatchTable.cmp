@@ -1,0 +1,38 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes"
+                access="global" controller="MatchController">
+
+    <aura:attribute name="records" type="Object" access="private"/>
+    <aura:attribute name="columns" type="List" access="private"/>
+
+    <aura:handler event="aura:waiting" action="{!c.toggleSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.toggleSpinner}"/>
+
+    <lightning:spinner aura:id="spinner" class="slds-hide" variant="brand"/>
+
+    <div style="width:200px; margin: 10px">
+        <lightning:input type="date" aura:id="startDate" label="{!$Label.c.startDate}" required="true"/>
+        <lightning:input type="date" aura:id="endDate" label="{!$Label.c.endDate}" required="true"/><br/>
+        <lightning:button variant="brand" label="{!$Label.c.findPeriod}" onclick="{! c.findPeriod }" />
+    </div>
+
+    <div style="display:none" id="messageError">
+        <ui:message title="Error" severity="error" closable="false">
+            {!$Label.c.errorMessage}
+        </ui:message>
+    </div><br/>
+
+    <div style="display:none" id="messageInformation">
+        <ui:message title="Information" severity="info" closable="false">
+            {!$Label.c.notFoundMessage}
+        </ui:message>
+    </div>
+
+    <div style="display:none" id="tableVisible">
+        <lightning:datatable
+                             keyField="id"
+                             data="{! v.records }"
+                             columns="{! v.columns }"
+                             hideCheckboxColumn="true"/>
+    </div>
+
+</aura:component>

@@ -1,0 +1,21 @@
+<apex:page standardController="Account">
+    <apex:form >
+    <apex:pageBlock mode="maindetail" title="{!$Label.Account_Detail}">
+        <apex:pageBlockSection columns="2">
+    			<apex:repeat value="{!$ObjectType.Account.fieldsets.MySetOfFields}" var="field">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!field.Label}" />
+                        <apex:outputField value="{!Account[field]}" />
+                    </apex:pageBlockSectionItem>
+    			</apex:repeat>
+  		</apex:pageBlockSection>
+        <apex:inlineEditSupport showOnEdit="saveButton, cancelButton" hideOnEdit="editButton" event="onDblClick"/>
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!edit}" value="Edit" id="editButton"/>
+            <apex:commandButton action="{!save}" value="Save" id="saveButton" style="display:none;"/>
+            <apex:commandButton action="{!delete}" value="Delete" id="deleteButton"/>
+            <apex:commandButton value="Cancel" id="cancelButton" style="display:none;"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>
