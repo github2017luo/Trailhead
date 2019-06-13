@@ -1,5 +1,5 @@
 /**
-* Form create account.
+* Form create account
 *
 * <P> View mode account after his created.
 * <P> Show time to page with using Action Function.
