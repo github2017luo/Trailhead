@@ -1,14 +1,3 @@
-/**
-* Form create account
-*
-* <P> View mode account after his created.
-* <P> Show time to page with using Action Function.
-* <P> Show or hide Input File component.
-*
-* @author Bogdanets Irina
-* @version 1.0
-*/
-
 public class AccountActionFunctionController {
     public String SystemFormat = Label.SystemFormat;
     public String UserFormat = Label.UserFormat;
