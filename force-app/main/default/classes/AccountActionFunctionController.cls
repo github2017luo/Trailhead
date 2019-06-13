@@ -1,3 +1,4 @@
+// comment
 public class AccountActionFunctionController {
     public String SystemFormat = Label.SystemFormat;
     public String UserFormat = Label.UserFormat;
